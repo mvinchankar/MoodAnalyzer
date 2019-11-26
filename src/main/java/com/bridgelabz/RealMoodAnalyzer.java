@@ -22,7 +22,7 @@ public class RealMoodAnalyzer {
                 return "HAPPY";
             }
         } catch (NullPointerException e) {
-
+            return "HAPPY";
         }
     }
 }
