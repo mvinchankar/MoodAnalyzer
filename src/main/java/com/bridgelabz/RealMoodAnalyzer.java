@@ -12,8 +12,8 @@ public class RealMoodAnalyzer {
 
         System.out.println("Ability to analyse and respond Happy or Sad Mood");
         try {
-            if (message.length()==0)
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_EMPTY,"Please enter proper mood");
+            if (message.length() == 0)
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_EMPTY, "Please enter proper mood");
             if (message.contains("SAD")) {
                 return "SAD";
             } else {
