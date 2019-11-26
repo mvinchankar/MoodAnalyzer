@@ -4,10 +4,6 @@ public class RealMoodAnalyzer {
 
     private String message;
 
-    public RealMoodAnalyzer() {
-
-    }
-
     public RealMoodAnalyzer(String message) {
         this.message = message;
     }

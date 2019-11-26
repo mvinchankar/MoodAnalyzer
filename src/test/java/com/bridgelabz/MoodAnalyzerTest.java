@@ -47,7 +47,7 @@ public class MoodAnalyzerTest {
 
     @Test
     public void given_Empty_Mood_Should_Throw_Exception() {
-        RealMoodAnalyzer moodAnalyzer = new RealMoodAnalyzer();
+        RealMoodAnalyzer moodAnalyzer = new RealMoodAnalyzer(null);
         try {
             moodAnalyzer.analyzeMood();
         } catch (MoodAnalysisException e) {
@@ -56,12 +56,22 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void givenMessage_WhenImproper_Should_Return_Object() {
+    public void givenMessage_WhenImproper_Should_Return_ClassNotFoundError() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
             moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I am in happy mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.type);
+        }
+    }
+
+    @Test
+    public void givenMessage_When_Notproper_Should_Return_NoSuchMethod() {
+        RealMoodAnalyzer moodAnalyzer = null;
+        try {
+            moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I am in happy mood");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
         }
     }
 
