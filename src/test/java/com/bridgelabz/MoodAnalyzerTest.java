@@ -90,7 +90,7 @@ public class MoodAnalyzerTest {
     public void givenMessage_WhenImproper_Should_Return_ClassNotFound_With_Parameters() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
-            moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer();
+            moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzerWithParameters("I am in happy mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.type);
         }
@@ -100,7 +100,7 @@ public class MoodAnalyzerTest {
     public void givenMessage_When_Notproper_Should_Return_NoSuchMethod_With_Parameters() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
-            moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer();
+            moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzerWithParameters("I am in happy mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
         }
