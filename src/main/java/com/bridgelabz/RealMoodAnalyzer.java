@@ -12,7 +12,7 @@ public class RealMoodAnalyzer {
         this.message = message;
     }
 
-    public String analyzeMood() {
+    public String analyzeMood() throws MoodAnalysisException {
 
         System.out.println("Ability to analyse and respond Happy or Sad Mood");
         try {
@@ -22,7 +22,7 @@ public class RealMoodAnalyzer {
                 return "HAPPY";
             }
         } catch (NullPointerException e) {
-            return "HAPPY";
+            return "Please Enter Valid Mood!!!!!!!!";
         }
     }
 }
