@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bridgelabz.MoodAnalyzerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2019-11-26T04:28:07" hostname="FH400" time="0.025">
+<testsuite name="com.bridgelabz.MoodAnalyzerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2019-11-26T04:35:30" hostname="FH400" time="0.019">
   <properties/>
-  <testcase name="givenMessage_WhenHappy_Should_Return_Happy" classname="com.bridgelabz.MoodAnalyzerTest" time="0.025">
+  <testcase name="givenMessage_WhenHappy_Should_Return_Happy" classname="com.bridgelabz.MoodAnalyzerTest" time="0.019">
     <failure message="org.junit.ComparisonFailure: expected:&lt;[HAPPY]&gt; but was:&lt;[SAD]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[HAPPY]&gt; but was:&lt;[SAD]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
