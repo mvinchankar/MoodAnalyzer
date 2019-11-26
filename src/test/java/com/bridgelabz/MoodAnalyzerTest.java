@@ -54,10 +54,15 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_EMPTY, e.type);
         }
     }
+
     @Test
-    public void givenMessage_WhenProper_Should_Return_Object() {
-        RealMoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I am in happy mood");
-        Assert.assertEquals(new RealMoodAnalyzer("I am in happy mood"),moodAnalyzer);
+    public void givenMessage_WhenImproper_Should_Return_Object() {
+        RealMoodAnalyzer moodAnalyzer = null;
+        try {
+            moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I am in happy mood");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.type);
+        }
     }
 
 

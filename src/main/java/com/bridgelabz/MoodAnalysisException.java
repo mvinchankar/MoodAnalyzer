@@ -13,10 +13,7 @@ public class MoodAnalysisException extends Exception {
         this.type = type;
     }
 
-    public MoodAnalysisException(ExceptionType type, Throwable cause) {
-        super(cause);
-        this.type = type;
-    }
+
 
     public MoodAnalysisException(ExceptionType type, String message, Throwable cause) {
         super(message, cause);
