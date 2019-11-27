@@ -116,4 +116,16 @@ public class MoodAnalyzerTest {
         }
 
     }
+
+    @Test
+    public void givenMoodAnalyzer_OnChangeMood_Should_Return_Happy() {
+        try {
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzerWithParameters("");
+            MoodAnalyzerReflector.setFieldValue(myObject,"message","I am in Happy Mood");
+            Object analyzeMood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
+            Assert.assertEquals("HAPPY", analyzeMood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+        }
+    }
 }

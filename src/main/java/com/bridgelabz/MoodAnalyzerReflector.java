@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyzerReflector {
@@ -53,9 +54,26 @@ public class MoodAnalyzerReflector {
         } catch (NoSuchMethodException e) {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,
                     "Define proper method!......");
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.METHOD_INVOCATION_ISSUE,
                     "May be Issue with Data Entered", e);
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS,"Not Accessible!",e);
         }
+    }
+
+    public static void setFieldValue(Object myObject, String fieldName, String fieldValue) throws MoodAnalysisException {
+        try {
+            Field field = myObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(myObject,fieldValue);
+        } catch (NoSuchFieldException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,
+                    "Define Proper Field Name!......");
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS,
+                    "May be Issue with Access", e);
+        }
+
     }
 }
