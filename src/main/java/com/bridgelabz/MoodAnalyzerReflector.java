@@ -3,7 +3,7 @@ package com.bridgelabz;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class MoodAnalyzerFactory {
+public class MoodAnalyzerReflector {
 
     private String message;
 
@@ -26,6 +26,7 @@ public class MoodAnalyzerFactory {
         }
         return null;
     }
+
     public static RealMoodAnalyzer createMoodAnalyzerWithParameters(String message) throws MoodAnalysisException {
         try {
             Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.RealMoodAnalyzer");
@@ -44,5 +45,17 @@ public class MoodAnalyzerFactory {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Object invokeMethod(Object moodAnalyzerObject, String methodName) throws MoodAnalysisException {
+        try {
+            return moodAnalyzerObject.getClass().getMethod(methodName).invoke(moodAnalyzerObject);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,
+                    "Define proper method!......");
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.METHOD_INVOCATION_ISSUE,
+                    "May be Issue with Data Entered", e);
+        }
     }
 }

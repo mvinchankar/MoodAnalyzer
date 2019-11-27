@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bridgelabz.MoodAnalyzerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-26T10:40:09" hostname="FH400" time="0.004">
+<testsuite name="com.bridgelabz.MoodAnalyzerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-27T05:30:08" hostname="FH400" time="0.011">
   <properties/>
-  <testcase name="givenMessage_WhenImproper_Should_Return_ClassNotFound_With_Parameters" classname="com.bridgelabz.MoodAnalyzerTest" time="0.004"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="given_Happy_Message_WithReflection_Should_Return_Happy" classname="com.bridgelabz.MoodAnalyzerTest" time="0.011"/>
+  <system-out><![CDATA[Ability to analyse and respond Happy or Sad Mood
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
