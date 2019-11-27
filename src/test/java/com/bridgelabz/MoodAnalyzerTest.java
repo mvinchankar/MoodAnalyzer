@@ -3,6 +3,8 @@ package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+
 public class MoodAnalyzerTest {
 
     @Test
@@ -59,7 +61,8 @@ public class MoodAnalyzerTest {
     public void givenMessage_WhenImproper_Should_Return_ClassNotFoundError() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
-            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer(constructor);
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.type);
         }
@@ -69,7 +72,8 @@ public class MoodAnalyzerTest {
     public void givenMessage_When_Notproper_Should_Return_NoSuchMethod() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
-            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer(constructor);
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
         }
@@ -79,7 +83,8 @@ public class MoodAnalyzerTest {
     public void givenMessage_WhenProper_Should_Return_Object() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
-            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzerWithParameters("I am in happy mood");
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer(constructor,"I am in happy mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(new RealMoodAnalyzer("I am in happy mood"), moodAnalyzer);
         }
@@ -90,7 +95,8 @@ public class MoodAnalyzerTest {
     public void givenMessage_WhenImproper_Should_Return_ClassNotFound_With_Parameters() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
-            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzerWithParameters("I am in happy mood");
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer(constructor,"I am in happy mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.type);
         }
@@ -100,7 +106,8 @@ public class MoodAnalyzerTest {
     public void givenMessage_When_Notproper_Should_Return_NoSuchMethod_With_Parameters() {
         RealMoodAnalyzer moodAnalyzer = null;
         try {
-            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzerWithParameters("I am in happy mood");
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer(constructor,"I am in happy mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
         }
@@ -109,7 +116,8 @@ public class MoodAnalyzerTest {
     @Test
     public void given_Happy_Message_WithReflection_Should_Return_Happy() {
         try {
-            Object myObject = MoodAnalyzerReflector.createMoodAnalyzerWithParameters("I am in Happy Mood");
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer(constructor,"I am in Happy Mood");
             Object analyzeMood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
             Assert.assertEquals("HAPPY", analyzeMood);
         } catch (MoodAnalysisException e) {
@@ -120,7 +128,8 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyzer_OnChangeMood_Should_Return_Happy() {
         try {
-            Object myObject = MoodAnalyzerReflector.createMoodAnalyzerWithParameters("");
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer(constructor);
             MoodAnalyzerReflector.setFieldValue(myObject,"message","I am in Happy Mood");
             Object analyzeMood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
             Assert.assertEquals("HAPPY", analyzeMood);
@@ -128,4 +137,18 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenHappyMessage_WithDefaultConstructor_Should_Return_Happy() {
+        try {
+            Constructor<?> constructor = MoodAnalyzerReflector.getConstructor(String.class);
+            Object myObject =MoodAnalyzerReflector.createMoodAnalyzer(constructor);
+            MoodAnalyzerReflector.setFieldValue(myObject,"message","I am in Happy Mood");
+            Object analyzeMood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
+            Assert.assertEquals("HAPPY", analyzeMood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
